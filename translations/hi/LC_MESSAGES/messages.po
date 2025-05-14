@@ -1,0 +1,47 @@
+msgid "Healthcare Symptom Checker"
+msgstr "हेल्थकेयर लक्षण जांचकर्ता"
+
+msgid "Select Language"
+msgstr "भाषा चुनें"
+
+msgid "Symptom Checker"
+msgstr "लक्षण जांचकर्ता"
+
+msgid "Enter Your Symptoms"
+msgstr "अपने लक्षण दर्ज करें"
+
+msgid "e.g., chest_pain, breathlessness"
+msgstr "उदाहरण के लिए, सीने_में_दर्द, सांस_की_तकलीफ"
+
+msgid "Submit"
+msgstr "जमा करें"
+
+msgid "Start Speech Recognition"
+msgstr "वॉइस रिकग्निशन शुरू करें"
+
+msgid "Predicted Disease"
+msgstr "अनुमानित बीमारी"
+
+msgid "Recommended Hospitals"
+msgstr "अनुशंसित अस्पताल"
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Show Details"
+msgstr "विवरण दिखाएं"
+
+msgid "Google Maps"
+msgstr "गूगल मैप्स"
+
+msgid "Specialty"
+msgstr "विशेषता"
+
+msgid "Address"
+msgstr "पता"
+
+msgid "Phone"
+msgstr "फोन"
+
+msgid "Website"
+msgstr "वेबसाइट"

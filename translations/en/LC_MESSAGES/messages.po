@@ -1,0 +1,47 @@
+msgid "Healthcare Symptom Checker"
+msgstr "Healthcare Symptom Checker"
+
+msgid "Select Language"
+msgstr "Select Language"
+
+msgid "Symptom Checker"
+msgstr "Symptom Checker"
+
+msgid "Enter Your Symptoms"
+msgstr "Enter Your Symptoms"
+
+msgid "e.g., chest_pain, breathlessness"
+msgstr "e.g., chest_pain, breathlessness"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Start Speech Recognition"
+msgstr "Start Speech Recognition"
+
+msgid "Predicted Disease"
+msgstr "Predicted Disease"
+
+msgid "Recommended Hospitals"
+msgstr "Recommended Hospitals"
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "Show Details"
+msgstr "Show Details"
+
+msgid "Google Maps"
+msgstr "Google Maps"
+
+msgid "Specialty"
+msgstr "Specialty"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Website"
+msgstr "Website"

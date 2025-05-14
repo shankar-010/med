@@ -1,0 +1,2869 @@
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Health Care Center</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+<!--  </head>-->
+
+<!--  <style>-->
+
+<!--        .logo {-->
+<!--            width: 50px;-->
+<!--            height: 50px;-->
+<!--            color: black;-->
+<!--            margin-top: 0;-->
+<!--            margin-left: 2px;-->
+<!--        }-->
+
+<!--        .myimg {-->
+<!--            width: 50px;-->
+<!--            height: 50px;-->
+<!--            border: 2px solid black;-->
+<!--            border-radius: 25px;-->
+<!--        }-->
+
+
+
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--        <div class="container-fluid">-->
+<!--            &lt;!&ndash; Logo at the top-left corner &ndash;&gt;-->
+<!--            <div class="logo">-->
+<!--                <img class="myimg" src="{{ url_for('static', filename='img.png') }}" alt="">-->
+<!--            </div>-->
+
+<!--            <a class="navbar-brand" href="#">Health Center</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" aria-current="page" href="/index">Home</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/about">About</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/contact">Contact</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/developer">Developer</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/blog">Blog</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <form class="d-flex" role="search">-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+
+
+
+
+<!--&lt;!&ndash; main form of page &ndash;&gt;-->
+<!--<h1 class="mt-4 my-4 text-center text-green">Health Center!!!</h1>-->
+<!--<div class="container my-4 mt-4" style="background: black; color: white; border-radius: 15px; padding: 40px;">-->
+<!--    <form action="/predict" method="post">-->
+<!--        <div class="form-group">-->
+<!--            <label for="symptoms">Select Symptoms:</label>-->
+<!--            <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="type systems such as itching, sleeping, aching etc">-->
+
+<!--        </div>-->
+<!--        <br>-->
+<!--        <button type="button" id="startSpeechRecognition" class="btn btn-primary" style="margin-left:3px;border:1px solid white; border-radius:20px;">-->
+<!--            Start Speech Recognition-->
+<!--        </button>-->
+<!--        <br>-->
+
+<!--        &lt;!&ndash; Display the transcribed text here &ndash;&gt;-->
+<!--        <div name="mysysms" id="transcription"></div>-->
+
+
+<!--        <br>-->
+
+<!--        <button type="submit" class="btn btn-danger btn-lg" style="width: 100%; padding: 14px; margin-bottom: 5px;">Recomendation</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash; Results &ndash;&gt;-->
+<!--&lt;!&ndash;    {% if predicted_disease %}&ndash;&gt;-->
+<!--<h1 class="text-center my-4 mt-4">Our AI System Results</h1>-->
+<!--<div class="container">-->
+
+<!--    <div class="result-container">-->
+<!--        &lt;!&ndash; Buttons to toggle display &ndash;&gt;-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal" style="padding:4px;  margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#F39334;color:black;">Disease</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#268AF3 ;color:black;">Description</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#F371F9 ;color:black;">Precaution</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px;border-radius:5px; background:#F8576F ;color:black;">Medications</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#99F741 ;color:black;">Workouts</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#E5E23D;color:black;">Diets</button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash;    {% endif %}&ndash;&gt;-->
+
+
+<!--&lt;!&ndash; Disease Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;"> &lt;!&ndash; Set header background color inline &ndash;&gt;-->
+<!--                    <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body;"> &lt;!&ndash; Set modal body background color inline &ndash;&gt;-->
+<!--                    <p>{{ predicted_disease }}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; Description Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;">-->
+<!--                    <h5 class="modal-title" id="descriptionModalLabel">Description</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p>{{ dis_des }}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--&lt;!&ndash; Precaution Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;">-->
+<!--                    <h5 class="modal-title" id="precautionModalLabel">Precaution</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <ul>-->
+<!--                        {% for i in my_precautions %}-->
+<!--                            <li>{{ i }}</li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+<!--    &lt;!&ndash; Medications Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;">-->
+<!--                    <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <ul>-->
+<!--                        {% for i in medications %}-->
+<!--                            <li>{{ i }}</li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Workouts Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog" >-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;">-->
+<!--                    <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <ul>-->
+<!--                        {% for i in workout %}-->
+<!--                            <li>{{ i }}</li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Diets Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header" style="background-color: #020606; color:white;">-->
+<!--                    <h5 class="modal-title" id="dietsModalLabel">Diets</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <ul>-->
+<!--                        {% for i in my_diet %}-->
+<!--                            <li>{{ i }}</li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+<!--        <script>-->
+<!--    const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');-->
+<!--    const transcriptionDiv = document.getElementById('transcription');-->
+
+<!--    startSpeechRecognitionButton.addEventListener('click', startSpeechRecognition);-->
+
+<!--    function startSpeechRecognition() {-->
+<!--        const recognition = new webkitSpeechRecognition(); // Use webkitSpeechRecognition for compatibility-->
+
+<!--        recognition.lang = 'en-US'; // Set the language for recognition-->
+
+<!--        recognition.onresult = function (event) {-->
+<!--            const result = event.results[0][0].transcript;-->
+<!--            transcriptionDiv.textContent = result;-->
+<!--        };-->
+
+<!--        recognition.onend = function () {-->
+<!--            console.log('Speech recognition ended.');-->
+<!--        };-->
+
+<!--        recognition.start();-->
+<!--    }-->
+<!--</script>-->
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
+
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Health Care Center</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">-->
+<!--    <style>-->
+<!--      :root {-->
+<!--        &#45;&#45;primary: #006d77;-->
+<!--        &#45;&#45;secondary: #003f5c;-->
+<!--        &#45;&#45;accent: #83c5be;-->
+<!--        &#45;&#45;bg-light: #f8fafc;-->
+<!--        &#45;&#45;text-dark: #1a202c;-->
+<!--        &#45;&#45;text-light: #4a5568;-->
+<!--      }-->
+
+<!--      body {-->
+<!--        font-family: 'Inter', sans-serif;-->
+<!--        background-color: var(&#45;&#45;bg-light);-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        line-height: 1.6;-->
+<!--        margin: 0;-->
+<!--      }-->
+
+<!--      /* Navbar Styling */-->
+<!--      .navbar {-->
+<!--        position: fixed;-->
+<!--        top: 0;-->
+<!--        width: 100%;-->
+<!--        background-color: rgba(255, 255, 255, 0.95);-->
+<!--        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);-->
+<!--        z-index: 1000;-->
+<!--        padding: 15px 30px;-->
+<!--        transition: background-color 0.3s ease;-->
+<!--      }-->
+
+<!--      .navbar-brand {-->
+<!--        font-family: 'Poppins', sans-serif;-->
+<!--        font-weight: 700;-->
+<!--        font-size: 1.9rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        transition: color 0.3s ease;-->
+<!--      }-->
+
+<!--      .navbar-brand:hover {-->
+<!--        color: var(&#45;&#45;secondary);-->
+<!--      }-->
+
+<!--      .logo img {-->
+<!--        width: 50px;-->
+<!--        height: 50px;-->
+<!--        border-radius: 50%;-->
+<!--        border: 2px solid var(&#45;&#45;accent);-->
+<!--        transition: transform 0.3s ease;-->
+<!--      }-->
+
+<!--      .logo img:hover {-->
+<!--        transform: rotate(360deg);-->
+<!--      }-->
+
+<!--      .nav-link {-->
+<!--        font-weight: 500;-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        margin: 0 20px;-->
+<!--        position: relative;-->
+<!--        transition: color 0.3s ease;-->
+<!--      }-->
+
+<!--      .nav-link:hover {-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--      }-->
+
+<!--      .nav-link::after {-->
+<!--        content: '';-->
+<!--        position: absolute;-->
+<!--        width: 0;-->
+<!--        height: 2px;-->
+<!--        bottom: -5px;-->
+<!--        left: 0;-->
+<!--        background-color: var(&#45;&#45;primary);-->
+<!--        transition: width 0.3s ease;-->
+<!--      }-->
+
+<!--      .nav-link:hover::after {-->
+<!--        width: 100%;-->
+<!--      }-->
+
+<!--      .btn-cta {-->
+<!--        background-color: var(&#45;&#45;primary);-->
+<!--        color: #fff;-->
+<!--        border-radius: 25px;-->
+<!--        padding: 8px 20px;-->
+<!--        font-weight: 500;-->
+<!--        transition: background-color 0.3s ease, transform 0.2s ease;-->
+<!--      }-->
+
+<!--      .btn-cta:hover {-->
+<!--        background-color: var(&#45;&#45;secondary);-->
+<!--        transform: translateY(-2px);-->
+<!--      }-->
+
+<!--      /* Main Form Styling */-->
+<!--      .main-heading {-->
+<!--        font-family: 'Poppins', sans-serif;-->
+<!--        font-weight: 700;-->
+<!--        font-size: 2.5rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-align: center;-->
+<!--        margin: 100px 0 40px;-->
+<!--      }-->
+
+<!--      .symptom-form-container {-->
+<!--        background: linear-gradient(145deg, #ffffff, #e6ecef);-->
+<!--        border-radius: 20px;-->
+<!--        padding: 40px;-->
+<!--        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);-->
+<!--        max-width: 700px;-->
+<!--        margin: 40px auto;-->
+<!--        position: relative;-->
+<!--        overflow: hidden;-->
+<!--      }-->
+
+<!--      .symptom-form-container::before {-->
+<!--        content: '';-->
+<!--        position: absolute;-->
+<!--        top: 0;-->
+<!--        left: 0;-->
+<!--        width: 100%;-->
+<!--        height: 5px;-->
+<!--        background: linear-gradient(to right, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--      }-->
+
+<!--      .form-group label {-->
+<!--        font-weight: 500;-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        margin-bottom: 12px;-->
+<!--        font-size: 1.1rem;-->
+<!--      }-->
+
+<!--      .form-control.symptom-input {-->
+<!--        border: none;-->
+<!--        border-bottom: 2px solid var(&#45;&#45;accent);-->
+<!--        border-radius: 0;-->
+<!--        padding: 12px 15px;-->
+<!--        background: transparent;-->
+<!--        transition: border-color 0.3s ease;-->
+<!--      }-->
+
+<!--      .form-control.symptom-input:focus {-->
+<!--        border-color: var(&#45;&#45;primary);-->
+<!--        box-shadow: none;-->
+<!--      }-->
+
+<!--      .btn-speech {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-radius: 30px;-->
+<!--        padding: 12px 25px;-->
+<!--        border: none;-->
+<!--        margin: 20px 0;-->
+<!--        font-weight: 500;-->
+<!--        transition: transform 0.3s ease, box-shadow 0.3s ease;-->
+<!--      }-->
+
+<!--      .btn-speech:hover {-->
+<!--        transform: translateY(-3px);-->
+<!--        box-shadow: 0 4px 12px rgba(0, 109, 119, 0.3);-->
+<!--      }-->
+
+<!--      .btn-submit {-->
+<!--        background: linear-gradient(135deg, #d32f2f, #b71c1c);-->
+<!--        color: #fff;-->
+<!--        border-radius: 10px;-->
+<!--        padding: 14px;-->
+<!--        font-weight: 500;-->
+<!--        width: 100%;-->
+<!--        border: none;-->
+<!--        transition: transform 0.3s ease, box-shadow 0.3s ease;-->
+<!--      }-->
+
+<!--      .btn-submit:hover {-->
+<!--        transform: translateY(-3px);-->
+<!--        box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);-->
+<!--      }-->
+
+<!--      #transcription {-->
+<!--        margin-top: 20px;-->
+<!--        color: var(&#45;&#45;text-light);-->
+<!--        font-style: italic;-->
+<!--        background: #f1f5f8;-->
+<!--        padding: 10px;-->
+<!--        border-radius: 8px;-->
+<!--      }-->
+
+<!--      /* Results Section Styling */-->
+<!--      .results-heading {-->
+<!--        font-family: 'Poppins', sans-serif;-->
+<!--        font-weight: 700;-->
+<!--        font-size: 2rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-align: center;-->
+<!--        margin: 60px 0 40px;-->
+<!--      }-->
+
+<!--      .result-container {-->
+<!--        display: grid;-->
+<!--        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));-->
+<!--        gap: 25px;-->
+<!--        max-width: 1000px;-->
+<!--        margin: 0 auto;-->
+<!--      }-->
+
+<!--      .toggle-button {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border: none;-->
+<!--        border-radius: 12px;-->
+<!--        padding: 15px;-->
+<!--        font-weight: 500;-->
+<!--        text-align: center;-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        justify-content: center;-->
+<!--        gap: 10px;-->
+<!--        transition: transform 0.3s ease, box-shadow 0.3s ease;-->
+<!--      }-->
+
+<!--      .toggle-button:hover {-->
+<!--        transform: scale(1.05);-->
+<!--        box-shadow: 0 6px 18px rgba(0, 109, 119, 0.2);-->
+<!--      }-->
+
+<!--      .toggle-button::before {-->
+<!--        content: '🩺';-->
+<!--        font-size: 1.2rem;-->
+<!--      }-->
+
+<!--      .toggle-button[data-bs-target="#descriptionModal"]::before { content: '📝'; }-->
+<!--      .toggle-button[data-bs-target="#precautionModal"]::before { content: '⚠️'; }-->
+<!--      .toggle-button[data-bs-target="#medicationsModal"]::before { content: '💊'; }-->
+<!--      .toggle-button[data-bs-target="#workoutsModal"]::before { content: '🏋️'; }-->
+<!--      .toggle-button[data-bs-target="#dietsModal"]::before { content: '🍎'; }-->
+
+<!--      /* Modal Styling */-->
+<!--      .modal-content {-->
+<!--        border-radius: 20px;-->
+<!--        border: none;-->
+<!--        animation: fadeIn 0.3s ease;-->
+<!--      }-->
+
+<!--      @keyframes fadeIn {-->
+<!--        from { opacity: 0; transform: translateY(20px); }-->
+<!--        to { opacity: 1; transform: translateY(0); }-->
+<!--      }-->
+
+<!--      .modal-header {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-top-left-radius: 20px;-->
+<!--        border-top-right-radius: 20px;-->
+<!--        padding: 20px;-->
+<!--      }-->
+
+<!--      .modal-title {-->
+<!--        font-family: 'Poppins', sans-serif;-->
+<!--        font-weight: 500;-->
+<!--        font-size: 1.5rem;-->
+<!--      }-->
+
+<!--      .btn-close {-->
+<!--        background: none;-->
+<!--        color: #fff;-->
+<!--        font-size: 1.2rem;-->
+<!--        opacity: 0.8;-->
+<!--        transition: opacity 0.3s ease;-->
+<!--      }-->
+
+<!--      .btn-close:hover {-->
+<!--        opacity: 1;-->
+<!--      }-->
+
+<!--      .modal-body {-->
+<!--        background-color: #fff;-->
+<!--        padding: 30px;-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        font-size: 1.1rem;-->
+<!--      }-->
+
+<!--      .modal-body ul {-->
+<!--        padding-left: 25px;-->
+<!--      }-->
+
+<!--      .modal-body ul li {-->
+<!--        margin-bottom: 12px;-->
+<!--        position: relative;-->
+<!--        padding-left: 20px;-->
+<!--      }-->
+
+<!--      .modal-body ul li::before {-->
+<!--        content: '✔';-->
+<!--        position: absolute;-->
+<!--        left: 0;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--      }-->
+
+<!--      /* Footer Styling */-->
+<!--      footer {-->
+<!--        background-color: var(&#45;&#45;secondary);-->
+<!--        color: #fff;-->
+<!--        padding: 40px 20px;-->
+<!--        margin-top: 60px;-->
+<!--      }-->
+
+<!--      footer h5 {-->
+<!--        font-family: 'Poppins', sans-serif;-->
+<!--        font-weight: 700;-->
+<!--        margin-bottom: 20px;-->
+<!--      }-->
+
+<!--      footer a {-->
+<!--        color: #e6ecef;-->
+<!--        text-decoration: none;-->
+<!--        transition: color 0.3s ease;-->
+<!--      }-->
+
+<!--      footer a:hover {-->
+<!--        color: var(&#45;&#45;accent);-->
+<!--      }-->
+
+<!--      /* Responsive Adjustments */-->
+<!--      @media (max-width: 768px) {-->
+<!--        .main-heading {-->
+<!--          font-size: 2rem;-->
+<!--          margin: 80px 0 30px;-->
+<!--        }-->
+
+<!--        .symptom-form-container {-->
+<!--          padding: 30px;-->
+<!--          margin: 20px;-->
+<!--        }-->
+
+<!--        .result-container {-->
+<!--          grid-template-columns: 1fr;-->
+<!--          gap: 15px;-->
+<!--        }-->
+
+<!--        .toggle-button {-->
+<!--          padding: 12px;-->
+<!--        }-->
+
+<!--        footer {-->
+<!--          text-align: center;-->
+<!--        }-->
+<!--      }-->
+
+<!--      @media (max-width: 576px) {-->
+<!--        .navbar-brand {-->
+<!--          font-size: 1.5rem;-->
+<!--        }-->
+
+<!--        .nav-link {-->
+<!--          margin: 10px 0;-->
+<!--        }-->
+
+<!--        .symptom-form-container {-->
+<!--          padding: 20px;-->
+<!--        }-->
+<!--      }-->
+<!--    </style>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--    <nav class="navbar navbar-expand-lg">-->
+<!--      <div class="container-fluid">-->
+<!--        <div class="logo">-->
+<!--          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">-->
+<!--        </div>-->
+<!--        <a class="navbar-brand" href="#">Health Center</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--          <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" aria-current="page" href="/index">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/about">About</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/contact">Contact</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/developer">Developer</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/blog">Blog</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <a href="/contact" class="btn btn-cta">Get in Touch</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+<!--    &lt;!&ndash; Main Form of Page &ndash;&gt;-->
+<!--    <h1 class="main-heading">Your Health, Our Priority</h1>-->
+<!--    <div class="symptom-form-container">-->
+<!--      <form action="/predict" method="post" aria-label="Symptom Input Form">-->
+<!--        <div class="form-group">-->
+<!--          <label for="symptoms">Describe Your Symptoms</label>-->
+<!--          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">-->
+<!--          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas.</small>-->
+<!--        </div>-->
+<!--        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>-->
+<!--        <div id="transcription" aria-live="polite"></div>-->
+<!--        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>-->
+<!--      </form>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Results &ndash;&gt;-->
+<!--    &lt;!&ndash; {% if predicted_disease %} &ndash;&gt;-->
+<!--    <h1 class="results-heading">Your Health Insights</h1>-->
+<!--    <div class="container">-->
+<!--      <div class="result-container">-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal" aria-label="View Predicted Disease">Disease</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal" aria-label="View Description">Description</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal" aria-label="View Precautions">Precaution</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal" aria-label="View Medications">Medications</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal" aria-label="View Workouts">Workouts</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal" aria-label="View Diets">Diets</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; {% endif %} &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Disease Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>{{ predicted_disease }}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Description Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>{{ dis_des }}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Precaution Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% for i in my_precautions %}-->
+<!--                <li>{{ i }}</li>-->
+<!--              {% endfor %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Medications Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% for i in medications %}-->
+<!--                <li>{{ i }}</li>-->
+<!--              {% endfor %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Workouts Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% for i in workout %}-->
+<!--                <li>{{ i }}</li>-->
+<!--              {% endfor %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Diets Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% for i in my_diet %}-->
+<!--                <li>{{ i }}</li>-->
+<!--              {% endfor %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Footer &ndash;&gt;-->
+<!--    <footer>-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Health Center</h5>-->
+<!--            <p>Providing cutting-edge AI-driven health insights for a better tomorrow.</p>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Quick Links</h5>-->
+<!--            <ul class="list-unstyled">-->
+<!--              <li><a href="/about">About Us</a></li>-->
+<!--              <li><a href="/contact">Contact</a></li>-->
+<!--              <li><a href="/blog">Health Blog</a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Contact Us</h5>-->
+<!--            <p>Email: support@healthcenter.com</p>-->
+<!--            <p>Phone: (123) 456-7890</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </footer>-->
+
+<!--    <script>-->
+<!--      const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');-->
+<!--      const transcriptionDiv = document.getElementById('transcription');-->
+
+<!--      startSpeechRecognitionButton.addEventListener('click', startSpeechRecognition);-->
+
+<!--      function startSpeechRecognition() {-->
+<!--        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();-->
+<!--        recognition.lang = 'en-US';-->
+
+<!--        recognition.onstart = function () {-->
+<!--          startSpeechRecognitionButton.textContent = 'Listening...';-->
+<!--          startSpeechRecognitionButton.disabled = true;-->
+<!--        };-->
+
+<!--        recognition.onresult = function (event) {-->
+<!--          const result = event.results[0][0].transcript;-->
+<!--          transcriptionDiv.textContent = result;-->
+<!--        };-->
+
+<!--        recognition.onend = function () {-->
+<!--          startSpeechRecognitionButton.textContent = 'Start Speech Recognition';-->
+<!--          startSpeechRecognitionButton.disabled = false;-->
+<!--          console.log('Speech recognition ended.');-->
+<!--        };-->
+
+<!--        recognition.start();-->
+<!--      }-->
+<!--    </script>-->
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
+<!--  </body>-->
+<!--</html>-->
+
+
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Health Care Center</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+<!--    <style>-->
+<!--      body {-->
+<!--        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;-->
+<!--      }-->
+<!--      h1, h2, h5 {-->
+<!--        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;-->
+<!--      }-->
+<!--    </style>-->
+<!--    <style>-->
+<!--      :root {-->
+<!--        &#45;&#45;primary: #006d77;-->
+<!--        &#45;&#45;secondary: #003f5c;-->
+<!--        &#45;&#45;accent: #83c5be;-->
+<!--        &#45;&#45;bg-light: #f8fafc;-->
+<!--        &#45;&#45;text-dark: #1a202c;-->
+<!--        &#45;&#45;text-light: #4a5568;-->
+<!--      }-->
+<!--      body {-->
+<!--        background-color: var(&#45;&#45;bg-light);-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        line-height: 1.6;-->
+<!--        margin: 0;-->
+<!--      }-->
+<!--      .navbar {-->
+<!--        position: fixed;-->
+<!--        top: 0;-->
+<!--        width: 100%;-->
+<!--        background-color: rgba(255, 255, 255, 0.95);-->
+<!--        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);-->
+<!--        z-index: 1000;-->
+<!--        padding: 15px 30px;-->
+<!--      }-->
+<!--      .navbar-brand {-->
+<!--        font-weight: 700;-->
+<!--        font-size: 1.9rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--      }-->
+<!--      .navbar-brand:hover {-->
+<!--        color: var(&#45;&#45;secondary);-->
+<!--      }-->
+<!--      .logo img {-->
+<!--        width: 50px;-->
+<!--        height: 50px;-->
+<!--        border-radius: 50%;-->
+<!--        border: 2px solid var(&#45;&#45;accent);-->
+<!--      }-->
+<!--      .nav-link {-->
+<!--        font-weight: 500;-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--        margin: 0 20px;-->
+<!--      }-->
+<!--      .nav-link:hover {-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--      }-->
+<!--      .btn-cta {-->
+<!--        background-color: var(&#45;&#45;primary);-->
+<!--        color: #fff;-->
+<!--        border-radius: 25px;-->
+<!--        padding: 8px 20px;-->
+<!--      }-->
+<!--      .main-heading {-->
+<!--        font-weight: 700;-->
+<!--        font-size: 2.5rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-align: center;-->
+<!--        margin: 100px 0 40px;-->
+<!--      }-->
+<!--      .symptom-form-container {-->
+<!--        background: linear-gradient(145deg, #ffffff, #e6ecef);-->
+<!--        border-radius: 20px;-->
+<!--        padding: 40px;-->
+<!--        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);-->
+<!--        max-width: 700px;-->
+<!--        margin: 40px auto;-->
+<!--      }-->
+<!--      .form-group label {-->
+<!--        font-weight: 500;-->
+<!--        color: var(&#45;&#45;text-dark);-->
+<!--      }-->
+<!--      .form-control.symptom-input {-->
+<!--        border: none;-->
+<!--        border-bottom: 2px solid var(&#45;&#45;accent);-->
+<!--        border-radius: 0;-->
+<!--        padding: 12px 15px;-->
+<!--      }-->
+<!--      .btn-speech, .btn-submit {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-radius: 10px;-->
+<!--        padding: 12px 25px;-->
+<!--        border: none;-->
+<!--      }-->
+<!--      .btn-submit {-->
+<!--        background: linear-gradient(135deg, #d32f2f, #b71c1c);-->
+<!--        width: 100%;-->
+<!--      }-->
+<!--      #transcription {-->
+<!--        margin-top: 20px;-->
+<!--        color: var(&#45;&#45;text-light);-->
+<!--        background: #f1f5f8;-->
+<!--        padding: 10px;-->
+<!--        border-radius: 8px;-->
+<!--      }-->
+<!--      .results-heading {-->
+<!--        font-weight: 700;-->
+<!--        font-size: 2rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-align: center;-->
+<!--        margin: 60px 0 40px;-->
+<!--      }-->
+<!--      .result-container {-->
+<!--        display: grid;-->
+<!--        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));-->
+<!--        gap: 25px;-->
+<!--        max-width: 1000px;-->
+<!--        margin: 0 auto;-->
+<!--      }-->
+<!--      .toggle-button {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-radius: 12px;-->
+<!--        padding: 15px;-->
+<!--      }-->
+<!--      .hospital-section {-->
+<!--        max-width: 1000px;-->
+<!--        margin: 40px auto;-->
+<!--        padding: 20px;-->
+<!--        background: linear-gradient(145deg, #ffffff, #e6ecef);-->
+<!--        border-radius: 20px;-->
+<!--        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);-->
+<!--      }-->
+<!--      .hospital-heading {-->
+<!--        font-weight: 700;-->
+<!--        font-size: 2rem;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-align: center;-->
+<!--        margin-bottom: 30px;-->
+<!--      }-->
+<!--      .hospital-card {-->
+<!--        background: #fff;-->
+<!--        border-radius: 15px;-->
+<!--        padding: 20px;-->
+<!--        margin-bottom: 20px;-->
+<!--        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);-->
+<!--        transition: transform 0.3s ease;-->
+<!--      }-->
+<!--      .hospital-card:hover {-->
+<!--        transform: translateY(-5px);-->
+<!--      }-->
+<!--      .hospital-card h5 {-->
+<!--        font-weight: 600;-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--      }-->
+<!--      .hospital-card p {-->
+<!--        color: var(&#45;&#45;text-light);-->
+<!--      }-->
+<!--      .hospital-card a, .hospital-card button {-->
+<!--        color: var(&#45;&#45;primary);-->
+<!--        text-decoration: none;-->
+<!--        margin-right: 10px;-->
+<!--        cursor: pointer;-->
+<!--      }-->
+<!--      .details-space {-->
+<!--        margin-top: 10px;-->
+<!--        padding: 10px;-->
+<!--        background: #f1f5f8;-->
+<!--        border-radius: 8px;-->
+<!--        display: none;-->
+<!--      }-->
+<!--      .btn-primary {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-radius: 10px;-->
+<!--        padding: 10px 20px;-->
+<!--        margin-left: 10px;-->
+<!--        border: none;-->
+<!--      }-->
+<!--      .modal-content {-->
+<!--        border-radius: 20px;-->
+<!--        border: none;-->
+<!--      }-->
+<!--      .modal-header {-->
+<!--        background: linear-gradient(135deg, var(&#45;&#45;primary), var(&#45;&#45;accent));-->
+<!--        color: #fff;-->
+<!--        border-top-left-radius: 20px;-->
+<!--        border-top-right-radius: 20px;-->
+<!--      }-->
+<!--      .modal-body {-->
+<!--        background-color: #fff;-->
+<!--        padding: 30px;-->
+<!--      }-->
+<!--      footer {-->
+<!--        background-color: var(&#45;&#45;secondary);-->
+<!--        color: #fff;-->
+<!--        padding: 40px 20px;-->
+<!--        margin-top: 60px;-->
+<!--      }-->
+<!--      @media (max-width: 768px) {-->
+<!--        .main-heading { font-size: 2rem; }-->
+<!--        .symptom-form-container { padding: 30px; margin: 20px; }-->
+<!--        .result-container { grid-template-columns: 1fr; }-->
+<!--      }-->
+<!--    </style>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <nav class="navbar navbar-expand-lg">-->
+<!--      <div class="container-fluid">-->
+<!--        <div class="logo">-->
+<!--          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">-->
+<!--        </div>-->
+<!--        <a class="navbar-brand" href="#">Health Center</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--          <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>-->
+<!--          </ul>-->
+<!--          <a href="/contact" class="btn btn-cta">Get in Touch</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+<!--    <h1 class="main-heading">Your Health, Our Priority</h1>-->
+<!--    <div class="symptom-form-container">-->
+<!--      <form action="/" method="post" aria-label="Symptom Input Form">-->
+<!--        <div class="form-group">-->
+<!--          <label for="symptoms">Describe Your Symptoms</label>-->
+<!--          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">-->
+<!--          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas (e.g., chest_pain, breathlessness).</small>-->
+<!--        </div>-->
+<!--        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>-->
+<!--        <div id="transcription" aria-live="polite"></div>-->
+<!--        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>-->
+<!--      </form>-->
+<!--      {% if message %}-->
+<!--        <div class="alert alert-warning mt-3" role="alert">-->
+<!--          {{ message }}-->
+<!--        </div>-->
+<!--      {% endif %}-->
+<!--    </div>-->
+
+<!--    {% if predicted_disease %}-->
+<!--    <h1 class="results-heading">Your Health Insights</h1>-->
+<!--    <div class="container">-->
+<!--      <div class="result-container">-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>-->
+<!--        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    {% endif %}-->
+
+<!--    {% if show_hospitals and predicted_disease %}-->
+<!--    <div class="hospital-section">-->
+<!--      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>-->
+<!--      <div id="hospital-list">-->
+<!--        -->
+<!--        <p>Loading nearby facilities...</p>-->
+<!--      </div>-->
+<!--      <div id="manual-location" style="display: none; margin-top: 20px;">-->
+<!--        <p>Enter your city or zip code to find facilities:</p>-->
+<!--        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">-->
+<!--        <button id="submit-location" class="btn btn-primary">Search</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    {% endif %}-->
+
+<!--    &lt;!&ndash; Modals &ndash;&gt;-->
+<!--    <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>{{ predicted_disease or 'Not available' }}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>{{ dis_des or 'Not available' }}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% if my_precautions %}-->
+<!--                {% for i in my_precautions %}-->
+<!--                  <li>{{ i }}</li>-->
+<!--                {% endfor %}-->
+<!--              {% else %}-->
+<!--                <li>No precautions available</li>-->
+<!--              {% endif %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% if medications %}-->
+<!--                {% for i in medications %}-->
+<!--                  <li>{{ i }}</li>-->
+<!--                {% endfor %}-->
+<!--              {% else %}-->
+<!--                <li>No medications available</li>-->
+<!--              {% endif %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% if workout %}-->
+<!--                {% for i in workout %}-->
+<!--                  <li>{{ i }}</li>-->
+<!--                {% endfor %}-->
+<!--              {% else %}-->
+<!--                <li>No workouts available</li>-->
+<!--              {% endif %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <ul>-->
+<!--              {% if my_diet %}-->
+<!--                {% for i in my_diet %}-->
+<!--                  <li>{{ i }}</li>-->
+<!--                {% endfor %}-->
+<!--              {% else %}-->
+<!--                <li>No diets available</li>-->
+<!--              {% endif %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <footer>-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Health Center</h5>-->
+<!--            <p>Providing cutting-edge AI-driven health insights.</p>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Quick Links</h5>-->
+<!--            <ul class="list-unstyled">-->
+<!--              <li><a href="/about">About Us</a></li>-->
+<!--              <li><a href="/contact">Contact</a></li>-->
+<!--              <li><a href="/blog">Health Blog</a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <h5>Contact Us</h5>-->
+<!--            <p>Email: support@healthcenter.com</p>-->
+<!--            <p>Phone: (123) 456-7890</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </footer>-->
+
+<!--    &lt;!&ndash; Pass data to script.js &ndash;&gt;-->
+<!--    <div id="hospital-data"-->
+<!--         data-show-hospitals="{{ show_hospitals | tojson }}"-->
+<!--         data-static-hospitals="{{ static_hospitals | tojson }}"-->
+<!--         data-predicted-disease="{{ predicted_disease | tojson }}"-->
+<!--         style="display: none;"></div>-->
+
+
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>-->
+<!--    <script src="{{ url_for('static', filename='scripts.js') }}"></script>-->
+<!--    -->
+<!--  </body>-->
+<!--</html>-->
+
+<!--below for maps-->
+
+
+
+ <!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      h1, h2, h5 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+    <style>
+      :root {
+        --primary: #006d77;
+        --secondary: #003f5c;
+        --accent: #83c5be;
+        --bg-light: #f8fafc;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+      }
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--primary);
+      }
+      .navbar-brand:hover {
+        color: var(--secondary);
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 20px;
+      }
+      .nav-link:hover {
+        color: var(--primary);
+      }
+      .btn-cta {
+        background-color: var(--primary);
+        color: #fff;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+      .main-heading {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 100px 0 40px;
+      }
+      .symptom-form-container {
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 40px auto;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      .form-control.symptom-input {
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        border-radius: 0;
+        padding: 12px 15px;
+      }
+      .btn-speech, .btn-submit {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        border: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        width: 100%;
+      }
+      #transcription {
+        margin-top: 20px;
+        color: var(--text-light);
+        background: #f1f5f8;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .results-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 60px 0 40px;
+      }
+      .result-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .toggle-button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .hospital-section {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .hospital-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hospital-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .hospital-card:hover {
+        transform: translateY(-5px);
+      }
+      .hospital-card h5 {
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .hospital-card p {
+        color: var(--text-light);
+      }
+      .hospital-card a, .hospital-card button {
+        color: var(--primary);
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .details-space {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f1f5f8;
+        border-radius: 8px;
+        display: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+      }
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+      }
+      .modal-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .modal-body {
+        background-color: #fff;
+        padding: 30px;
+      }
+      footer {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+      @media (max-width: 768px) {
+        .main-heading { font-size: 2rem; }
+        .symptom-form-container { padding: 30px; margin: 20px; }
+        .result-container { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">
+        </div>
+        <a class="navbar-brand" href="#">Health Center</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="btn btn-cta">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="main-heading">Your Health, Our Priority</h1>
+    <div class="symptom-form-container">
+      <form action="/" method="post" aria-label="Symptom Input Form">
+        <div class="form-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">
+          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas (e.g., chest_pain, breathlessness).</small>
+        </div>
+        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>
+        <div id="transcription" aria-live="polite"></div>
+        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>
+      </form>
+      {% if message %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if predicted_disease %}
+    <h1 class="results-heading">Your Health Insights</h1>
+    <div class="container">
+      <div class="result-container">
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+      </div>
+    </div>
+    {% endif %} 
+
+    {% if show_hospitals and predicted_disease %}
+    <div class="hospital-section">
+      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>
+      <div id="hospital-list">
+
+        <p>Loading nearby facilities...</p>
+      </div>
+      <div id="manual-location" style="display: none; margin-top: 20px;">
+        <p>Enter your city or zip code to find facilities:</p>
+        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">
+        <button id="submit-location" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    {% endif %} -->
+
+    <!-- Modals -->
+    <!-- <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ predicted_disease or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ dis_des or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_precautions %}
+                {% for i in my_precautions %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No precautions available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if medications %}
+                {% for i in medications %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No medications available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if workout %}
+                {% for i in workout %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No workouts available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_diet %}
+                {% for i in my_diet %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No diets available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Health Center</h5>
+            <p>Providing cutting-edge AI-driven health insights.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/blog">Health Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>Email: support@healthcenter.com</p>
+            <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+
+    <!-- Pass data to script.js -->
+   <!-- <div id="hospital-data"
+         data-show-hospitals="{{ show_hospitals | tojson }}"
+         data-static-hospitals="{{ static_hospitals | tojson }}"
+         data-predicted-disease="{{ predicted_disease | tojson }}"
+         style="display: none;"></div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+  </body>
+</html>   -->
+<!-- chat -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      h1, h2, h5 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+    <style>
+      :root {
+        --primary: #006d77;
+        --secondary: #003f5c;
+        --accent: #83c5be;
+        --bg-light: #f8fafc;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+      }
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--primary);
+      }
+      .navbar-brand:hover {
+        color: var(--secondary);
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 20px;
+      }
+      .nav-link:hover {
+        color: var(--primary);
+      }
+      .btn-cta {
+        background-color: var(--primary);
+        color: #fff;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+      .main-heading {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 100px 0 40px;
+      }
+      .symptom-form-container {
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 40px auto;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      .form-control.symptom-input {
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        border-radius: 0;
+        padding: 12px 15px;
+      }
+      .btn-speech, .btn-submit, .btn-chatbot {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        border: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        width: 100%;
+      }
+      #transcription {
+        margin-top: 20px;
+        color: var(--text-light);
+        background: #f1f5f8;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .results-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 60px 0 40px;
+      }
+      .result-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .toggle-button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .hospital-section {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .hospital-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hospital-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .hospital-card:hover {
+        transform: translateY(-5px);
+      }
+      .hospital-card h5 {
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .hospital-card p {
+        color: var(--text-light);
+      }
+      .hospital-card a, .hospital-card button {
+        color: var(--primary);
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .details-space {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f1f5f8;
+        border-radius: 8px;
+        display: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+      }
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+      }
+      .modal-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .modal-body {
+        background-color: #fff;
+        padding: 30px;
+      }
+      footer {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+      /* Chatbot Widget Styles */
+      .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .chatbot-icon:hover {
+        transform: scale(1.1);
+      }
+      .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        max-height: 500px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+      }
+      .chatbot-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chatbot-header h5 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .chatbot-body {
+        padding: 15px;
+        flex-grow: 1;
+        overflow-y: auto;
+        background: #f1f5f8;
+      }
+      .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+      .chat-message.bot {
+        background: #e6ecef;
+        align-self: flex-start;
+      }
+      .chat-message.user {
+        background: var(--primary);
+        color: #fff;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #e6ecef;
+        display: flex;
+        align-items: center;
+      }
+      .chatbot-footer input {
+        flex-grow: 1;
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        margin-right: 10px;
+        background: #f1f5f8;
+      }
+      .chatbot-footer button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+      }
+      @media (max-width: 768px) {
+        .main-heading { font-size: 2rem; }
+        .symptom-form-container { padding: 30px; margin: 20px; }
+        .result-container { grid-template-columns: 1fr; }
+        .chatbot-container { width: 90%; right: 5%; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">
+        </div>
+        <a class="navbar-brand" href="#">Health Center</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="btn btn-cta">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="main-heading">Your Health, Our Priority</h1>
+    <div class="symptom-form-container">
+      <form action="/" method="post" id="symptom-form" aria-label="Symptom Input Form">
+        <div class="form-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">
+          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas (e.g., chest_pain, breathlessness). Or use the chatbot below.</small>
+        </div>
+        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>
+        <button type="button" id="startChatbot" class="btn btn-chatbot" aria-label="Chat with Symptom Assistant">Chat with Symptom Assistant</button>
+        <div id="transcription" aria-live="polite"></div>
+        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>
+      </form>
+      {% if message %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if predicted_disease %}
+    <h1 class="results-heading">Your Health Insights</h1>
+    <div class="container">
+      <div class="result-container">
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+      </div>
+    </div>
+    {% endif %} 
+
+    {% if show_hospitals and predicted_disease %}
+    <div class="hospital-section">
+      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>
+      <div id="hospital-list">
+        <p>Loading nearby facilities...</p>
+      </div>
+      <div id="manual-location" style="display: none; margin-top: 20px;">
+        <p>Enter your city or zip code to find facilities:</p>
+        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">
+        <button id="submit-location" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Chatbot Widget -->
+    <!-- <div class="chatbot-icon" id="chatbot-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 1 .398-2.292z"/>
+      </svg>
+    </div>
+    <div class="chatbot-container" id="chatbot-container">
+      <div class="chatbot-header">
+        <h5>Symptom Assistant</h5>
+        <button type="button" class="btn-close btn-close-white" id="chatbot-close" aria-label="Close"></button>
+      </div>
+      <div class="chatbot-body" id="chatbot-body">
+        <div class="chat-message bot">Hello! I'm here to help you describe your symptoms. What is your main symptom right now?</div>
+      </div>
+      <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Type your response..." aria-label="Type your response">
+        <button id="chatbot-send">Send</button>
+      </div>
+    </div> -->
+
+    <!-- Modals -->
+    <!-- <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ predicted_disease or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ dis_des or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_precautions %}
+                {% for i in my_precautions %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No precautions available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if medications %}
+                {% for i in medications %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No medications available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if workout %}
+                {% for i in workout %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No workouts available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_diet %}
+                {% for i in my_diet %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No diets available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Health Center</h5>
+            <p>Providing cutting-edge AI-driven health insights.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/blog">Health Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>Email: support@healthcenter.com</p>
+            <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+
+    <!-- Pass data to script.js -->
+    <!-- <div id="hospital-data"
+         data-show-hospitals="{{ show_hospitals | tojson }}"
+         data-static-hospitals="{{ static_hospitals | tojson }}"
+         data-predicted-disease="{{ predicted_disease | tojson }}"
+         style="display: none;"></div> -->
+
+    <!-- Pass symptoms_dict to frontend -->
+    <!-- <script>
+      const symptoms_dict = {{ symptoms_dict | tojson }};
+    </script> -->
+<!-- <script>
+  // Only set symptoms_dict if it hasn't been defined yet
+  if (!window.symptoms_dict) {
+    // Store the raw JSON string to avoid direct JavaScript evaluation
+    const rawJsonString = '{{ symptoms_dict | tojson | safe }}';
+    console.log('Raw JSON string:', rawJsonString);
+
+    let symptoms_dict;
+    try {
+      symptoms_dict = JSON.parse(rawJsonString);
+      console.log('symptoms_dict loaded successfully:', symptoms_dict);
+    } catch (e) {
+      console.error('Error parsing symptoms_dict:', e);
+      symptoms_dict = {};
+    }
+
+    // Make symptoms_dict globally accessible
+    window.symptoms_dict = symptoms_dict;
+  } else {
+    console.log('window.symptoms_dict already exists:', window.symptoms_dict);
+  }
+</script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html>  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      h1, h2, h5 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+    <style>
+      :root {
+        --primary: #006d77;
+        --secondary: #003f5c;
+        --accent: #83c5be;
+        --bg-light: #f8fafc;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+      }
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--primary);
+      }
+      .navbar-brand:hover {
+        color: var(--secondary);
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 20px;
+      }
+      .nav-link:hover {
+        color: var(--primary);
+      }
+      .btn-cta {
+        background-color: var(--primary);
+        color: #fff;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+      .main-heading {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 100px 0 40px;
+      }
+      .symptom-form-container {
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 40px auto;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      .form-control.symptom-input {
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        border-radius: 0;
+        padding: 12px 15px;
+      }
+      .btn-speech, .btn-submit, .btn-chatbot {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        border: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        width: 100%;
+      }
+      #transcription {
+        margin-top: 20px;
+        color: var(--text-light);
+        background: #f1f5f8;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .results-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 60px 0 40px;
+      }
+      .result-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .toggle-button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .hospital-section {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .hospital-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hospital-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .hospital-card:hover {
+        transform: translateY(-5px);
+      }
+      .hospital-card h5 {
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .hospital-card p {
+        color: var(--text-light);
+      }
+      .hospital-card a, .hospital-card button {
+        color: var(--primary);
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .details-space {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f1f5f8;
+        border-radius: 8px;
+        display: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+      }
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+      }
+      .modal-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .modal-body {
+        background-color: #fff;
+        padding: 30px;
+      }
+      footer {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+      /* Chatbot Widget Styles */
+      .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .chatbot-icon:hover {
+        transform: scale(1.1);
+      }
+      .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        max-height: 500px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+      }
+      .chatbot-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chatbot-header h5 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .chatbot-body {
+        padding: 15px;
+        flex-grow: 1;
+        overflow-y: auto;
+        background: #f1f5f8;
+      }
+      .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+      .chat-message.bot {
+        background: #e6ecef;
+        align-self: flex-start;
+      }
+      .chat-message.user {
+        background: var(--primary);
+        color: #fff;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #e6ecef;
+        display: flex;
+        align-items: center;
+      }
+      .chatbot-footer input {
+        flex-grow: 1;
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        margin-right: 10px;
+        background: #f1f5f8;
+      }
+      .chatbot-footer button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+      }
+      @media (max-width: 768px) {
+        .main-heading { font-size: 2rem; }
+        .symptom-form-container { padding: 30px; margin: 20px; }
+        .result-container { grid-template-columns: 1fr; }
+        .chatbot-container { width: 90%; right: 5%; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">
+        </div>
+        <a class="navbar-brand" href="#">Healthytic</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="btn btn-cta">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="main-heading">Your Health, Our Priority</h1>
+    <div class="symptom-form-container">
+      <form action="/" method="post" id="symptom-form" aria-label="Symptom Input Form">
+        <div class="form-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">
+          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas (e.g., chest_pain, breathlessness). Or use the chatbot below.</small>
+        </div>
+        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>
+        <button type="button" id="startChatbot" class="btn btn-chatbot" aria-label="Chat with Symptom Assistant">Chat with Symptom Assistant</button>
+        <div id="transcription" aria-live="polite"></div>
+        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>
+      </form>
+      {% if message %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if predicted_disease %}
+    <h1 class="results-heading">Your Health Insights</h1>
+    <div class="container">
+      <div class="result-container">
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+      </div>
+    </div>
+    {% endif %} 
+
+    {% if show_hospitals and predicted_disease %}
+    <div class="hospital-section">
+      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>
+      <div id="hospital-list">
+        <p>Loading nearby facilities...</p>
+      </div>
+      <div id="manual-location" style="display: none; margin-top: 20px;">
+        <p>Enter your city or zip code to find facilities:</p>
+        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">
+        <button id="submit-location" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-icon" id="chatbot-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 1 .398-2.292z"/>
+      </svg>
+    </div>
+    <div class="chatbot-container" id="chatbot-container">
+      <div class="chatbot-header">
+        <h5>Healthytic Assistant</h5>
+        <button type="button" class="btn-close btn-close-white" id="chatbot-close" aria-label="Close"></button>
+      </div>
+      <div class="chatbot-body" id="chatbot-body">
+        <div class="chat-message bot">Hello! I'm here to help you describe your symptoms. What is your main symptom right now?</div>
+      </div>
+      <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Type your response..." aria-label="Type your response">
+        <button id="chatbot-send">Send</button>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ predicted_disease or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ dis_des or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_precautions %}
+                {% for i in my_precautions %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No precautions available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if medications %}
+                {% for i in medications %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No medications available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if workout %}
+                {% for i in workout %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No workouts available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_diet %}
+                {% for i in my_diet %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No diets available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Health Center</h5>
+            <p>Providing cutting-edge AI-driven health insights.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/blog">Health Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>Email: support@healthcenter.com</p>
+            <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Pass data to script.js -->
+    <div id="hospital-data"
+         data-show-hospitals="{{ show_hospitals | tojson }}"
+         data-static-hospitals="{{ static_hospitals | tojson }}"
+         data-predicted-disease="{{ predicted_disease | tojson }}"
+         style="display: none;"></div>
+
+    <!-- Pass symptoms_dict to frontend -->
+<script>
+  // Store the raw JSON string for debugging
+  const rawJsonString = '{{ symptoms_dict | tojson | safe }}';
+  console.log('Raw JSON string:', rawJsonString);
+
+  try {
+    window.symptoms_dict = JSON.parse(rawJsonString);
+    console.log('symptoms_dict loaded successfully:', window.symptoms_dict);
+  } catch (e) {
+    console.error('Error parsing symptoms_dict:', e);
+    window.symptoms_dict = {};
+  }
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html>

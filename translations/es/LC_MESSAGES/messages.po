@@ -1,0 +1,47 @@
+msgid "Healthcare Symptom Checker"
+msgstr "Comprobador de Síntomas de Salud"
+
+msgid "Select Language"
+msgstr "Seleccionar Idioma"
+
+msgid "Symptom Checker"
+msgstr "Comprobador de Síntomas"
+
+msgid "Enter Your Symptoms"
+msgstr "Ingrese sus Síntomas"
+
+msgid "e.g., chest_pain, breathlessness"
+msgstr "por ejemplo, dolor_pecho, dificultad_respirar"
+
+msgid "Submit"
+msgstr "Enviar"
+
+msgid "Start Speech Recognition"
+msgstr "Iniciar Reconocimiento de Voz"
+
+msgid "Predicted Disease"
+msgstr "Enfermedad Predicha"
+
+msgid "Recommended Hospitals"
+msgstr "Hospitales Recomendados"
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Show Details"
+msgstr "Mostrar Detalles"
+
+msgid "Google Maps"
+msgstr "Google Maps"
+
+msgid "Specialty"
+msgstr "Especialidad"
+
+msgid "Address"
+msgstr "Dirección"
+
+msgid "Phone"
+msgstr "Teléfono"
+
+msgid "Website"
+msgstr "Sitio Web"

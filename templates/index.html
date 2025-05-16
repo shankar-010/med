@@ -2310,6 +2310,12 @@
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>
 </html>  -->
+<!-- 
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -2685,7 +2691,7 @@
     {% endif %}
 
     <!-- Chatbot Widget -->
-    <div class="chatbot-icon" id="chatbot-icon">
+    <!-- <div class="chatbot-icon" id="chatbot-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
         <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
         <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 1 .398-2.292z"/>
@@ -2703,10 +2709,10 @@
         <input type="text" id="chatbot-input" placeholder="Type your response..." aria-label="Type your response">
         <button id="chatbot-send">Send</button>
       </div>
-    </div>
+    </div> -->
 
     <!-- Modals -->
-    <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+    <!-- <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -2839,17 +2845,17 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
 
     <!-- Pass data to script.js -->
-    <div id="hospital-data"
+    <!-- <div id="hospital-data"
          data-show-hospitals="{{ show_hospitals | tojson }}"
          data-static-hospitals="{{ static_hospitals | tojson }}"
          data-predicted-disease="{{ predicted_disease | tojson }}"
-         style="display: none;"></div>
+         style="display: none;"></div> -->
 
     <!-- Pass symptoms_dict to frontend -->
-<script>
+<!-- <script>
   // Store the raw JSON string for debugging
   const rawJsonString = '{{ symptoms_dict | tojson | safe }}';
   console.log('Raw JSON string:', rawJsonString);
@@ -2866,4 +2872,1324 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>
-</html>
+</html> --> 
+<!-- lab -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      h1, h2, h5 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+    <style>
+      :root {
+        --primary: #006d77;
+        --secondary: #003f5c;
+        --accent: #83c5be;
+        --bg-light: #f8fafc;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+      }
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--primary);
+      }
+      .navbar-brand:hover {
+        color: var(--secondary);
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 20px;
+      }
+      .nav-link:hover {
+        color: var(--primary);
+      }
+      .btn-cta {
+        background-color: var(--primary);
+        color: #fff;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+      .main-heading {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 100px 0 40px;
+      }
+      .symptom-form-container {
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 40px auto;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      .form-control.symptom-input {
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        border-radius: 0;
+        padding: 12px 15px;
+      }
+      .btn-speech, .btn-submit, .btn-chatbot {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        border: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        width: 100%;
+      }
+      #transcription {
+        margin-top: 20px;
+        color: var(--text-light);
+        background: #f1f5f8;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .results-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 60px 0 40px;
+      }
+      .result-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .toggle-button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .hospital-section {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .hospital-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hospital-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .hospital-card:hover {
+        transform: translateY(-5px);
+      }
+      .hospital-card h5 {
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .hospital-card p {
+        color: var(--text-light);
+      }
+      .hospital-card a, .hospital-card button {
+        color: var(--primary);
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .details-space {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f1f5f8;
+        border-radius: 8px;
+        display: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+      }
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+      }
+      .modal-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .modal-body {
+        background-color: #fff;
+        padding: 30px;
+      }
+      footer {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+      /* Chatbot Widget Styles */
+      .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .chatbot-icon:hover {
+        transform: scale(1.1);
+      }
+      .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        max-height: 500px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+      }
+      .chatbot-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chatbot-header h5 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .chatbot-body {
+        padding: 15px;
+        flex-grow: 1;
+        overflow-y: auto;
+        background: #f1f5f8;
+      }
+      .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+      .chat-message.bot {
+        background: #e6ecef;
+        align-self: flex-start;
+      }
+      .chat-message.user {
+        background: var(--primary);
+        color: #fff;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #e6ecef;
+        display: flex;
+        align-items: center;
+      }
+      .chatbot-footer input {
+        flex-grow: 1;
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        margin-right: 10px;
+        background: #f1f5f8;
+      }
+      .chatbot-footer button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+      }
+      @media (max-width: 768px) {
+        .main-heading { font-size: 2rem; }
+        .symptom-form-container { padding: 30px; margin: 20px; }
+        .result-container { grid-template-columns: 1fr; }
+        .chatbot-container { width: 90%; right: 5%; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img.png') }}" alt="Health Center Logo" aria-label="Health Center Logo">
+        </div>
+        <a class="navbar-brand" href="#">Healthytic</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="btn btn-cta">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="main-heading">Your Health, Our Priority</h1>
+    <div class="symptom-form-container">
+      <form action="/" method="post" id="symptom-form" aria-label="Symptom Input Form">
+        <div class="form-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., fever, headache, fatigue" aria-describedby="symptomsHelp">
+          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas (e.g., chest_pain, breathlessness). Or use the chatbot below.</small>
+        </div>
+        <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button>
+        <button type="button" id="startChatbot" class="btn btn-chatbot" aria-label="Chat with Symptom Assistant">Chat with Symptom Assistant</button>
+        <div id="transcription" aria-live="polite"></div>
+        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Get Recommendations</button>
+      </form>
+      {% if message %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if predicted_disease %}
+    <h1 class="results-heading">Your Health Insights</h1>
+    <div class="container">
+      <div class="result-container">
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#labTestsModal">Lab Tests</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#labTestHistoryModal">Test History</button>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if show_hospitals and predicted_disease %}
+    <div class="hospital-section">
+      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>
+      <div id="hospital-list">
+        <p>Loading nearby facilities...</p>
+      </div>
+      <div id="manual-location" style="display: none; margin-top: 20px;">
+        <p>Enter your city or zip code to find facilities:</p>
+        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">
+        <button id="submit-location" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    {% endif %} -->
+
+    <!-- Chatbot Widget -->
+    <!-- <div class="chatbot-icon" id="chatbot-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 0 0 0-2 1 1 0 0 0 0 2z"/>
+        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 1 .398-2.292z"/>
+      </svg>
+    </div>
+    <div class="chatbot-container" id="chatbot-container">
+      <div class="chatbot-header">
+        <h5>Healthytic Assistant</h5>
+        <button type="button" class="btn-close btn-close-white" id="chatbot-close" aria-label="Close"></button>
+      </div>
+      <div class="chatbot-body" id="chatbot-body">
+        <div class="chat-message bot">Hello! I'm here to help you describe your symptoms. What is your main symptom right now?</div>
+      </div>
+      <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Type your response..." aria-label="Type your response">
+        <button id="chatbot-send">Send</button>
+      </div>
+    </div> -->
+
+    <!-- Modals -->
+    <!-- <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ predicted_disease or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ dis_des or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_precautions %}
+                {% for i in my_precautions %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No precautions available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if medications %}
+                {% for i in medications %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No medications available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if workout %}
+                {% for i in workout %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No workouts available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_diet %}
+                {% for i in my_diet %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No diets available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Lab Tests Modal -->
+    <!-- <div class="modal" id="labTestsModal" tabindex="-1" role="dialog" aria-labelledby="labTestsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labTestsModalLabel">Recommended Lab Tests</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>The following lab tests are recommended based on your predicted disease: <strong>{{ predicted_disease or 'Not available' }}</strong></p>
+            <ul>
+              {% if recommended_tests %}
+                {% for test in recommended_tests %}
+                  <li>{{ test }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No lab tests recommended for this condition.</li>
+              {% endif %}
+            </ul>
+            <h6>Record Your Test Results</h6>
+            <form id="lab-test-form" action="/submit_test_results" method="post">
+              <input type="hidden" name="disease" value="{{ predicted_disease }}">
+              <div class="form-group">
+                <label for="test_name">Test Name</label>
+                <select class="form-control" id="test_name" name="test_name" required>
+                  <option value="">Select a test</option>
+                  {% if recommended_tests %}
+                    {% for test in recommended_tests %}
+                      <option value="{{ test }}">{{ test }}</option>
+                    {% endfor %}
+                  {% else %}
+                    <option value="General Checkup">General Checkup</option>
+                  {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="test_result">Test Result</label>
+                <input type="text" class="form-control" id="test_result" name="test_result" placeholder="e.g., 120 mg/dL" required>
+              </div>
+              <div class="form-group">
+                <label for="test_date">Test Date</label>
+                <input type="date" class="form-control" id="test_date" name="test_date" required>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Submit Test Result</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Lab Test History Modal -->
+    <!-- <div class="modal" id="labTestHistoryModal" tabindex="-1" role="dialog" aria-labelledby="labTestHistoryModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labTestHistoryModalLabel">Lab Test History</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% if test_history %}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Disease</th>
+                    <th>Test Name</th>
+                    <th>Result</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="test-history-body">
+                  {% for record in test_history %}
+                    <tr>
+                      <td>{{ record.disease }}</td>
+                      <td>{{ record.test_name }}</td>
+                      <td>{{ record.test_result }}</td>
+                      <td>{{ record.test_date }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>No lab test history available.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Health Center</h5>
+            <p>Providing cutting-edge AI-driven health insights.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/blog">Health Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>Email: support@healthcenter.com</p>
+            <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+
+    <!-- Pass data to script.js -->
+    <!-- <div id="hospital-data"
+         data-show-hospitals="{{ show_hospitals | tojson }}"
+         data-static-hospitals="{{ static_hospitals | tojson }}"
+         data-predicted-disease="{{ predicted_disease | tojson }}"
+         style="display: none;"></div> -->
+
+    <!-- Pass symptoms_dict to frontend -->
+    <!-- <script>
+      // Store the raw JSON string for debugging
+      const rawJsonString = '{{ symptoms_dict | tojson | safe }}';
+      console.log('Raw JSON string:', rawJsonString);
+
+      try {
+        window.symptoms_dict = JSON.parse(rawJsonString);
+        console.log('symptoms_dict loaded successfully:', window.symptoms_dict);
+      } catch (e) {
+        console.error('Error parsing symptoms_dict:', e);
+        window.symptoms_dict = {};
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html> -->
+
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      h1, h2, h5 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+    <style>
+      :root {
+        --primary: #006d77;
+        --secondary: #003f5c;
+        --accent: #83c5be;
+        --bg-light: #f8fafc;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+      }
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--primary);
+      }
+      .navbar-brand:hover {
+        color: var(--secondary);
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin: 0 20px;
+      }
+      .nav-link:hover {
+        color: var(--primary);
+      }
+      .btn-cta {
+        background-color: var(--primary);
+        color: #fff;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+      .main-heading {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 100px 0 40px;
+      }
+      .symptom-form-container {
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 40px auto;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      .form-control.symptom-input {
+        border: none;
+        border-bottom: 2px solid var(--accent);
+        border-radius: 0;
+        padding: 12px 15px;
+      }
+      .btn-speech, .btn-submit, .btn-chatbot {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        border: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        width: 100%;
+      }
+      #transcription {
+        margin-top: 20px;
+        color: var(--text-light);
+        background: #f1f5f8;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .results-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin: 60px 0 40px;
+      }
+      .result-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .toggle-button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .hospital-section {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff, #e6ecef);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .hospital-heading {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hospital-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .hospital-card:hover {
+        transform: translateY(-5px);
+      }
+      .hospital-card h5 {
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .hospital-card p {
+        color: var(--text-light);
+      }
+      .hospital-card a, .hospital-card button {
+        color: var(--primary);
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .details-space {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f1f5f8;
+        border-radius: 8px;
+        display: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+      }
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+      }
+      .modal-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .modal-body {
+        background-color: #fff;
+        padding: 30px;
+      }
+      footer {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+      /* Chatbot Widget Styles */
+      .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .chatbot-icon:hover {
+        transform: scale(1.1);
+      }
+      .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        max-height: 500px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+      }
+      .chatbot-header {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chatbot-header h5 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .chatbot-body {
+        padding: 15px;
+        flex-grow: 1;
+        overflow-y: auto;
+        background: #f1f5f8;
+      }
+      .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+      .chat-message.bot {
+        background: #e6ecef;
+        align-self: flex-start;
+      }
+      .chat-message.user {
+        background: var(--primary);
+        color: #fff;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #e6ecef;
+        display: flex;
+        align-items: center;
+      }
+      .chatbot-footer input {
+        flex-grow: 1;
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        margin-right: 10px;
+        background: #f1f5f8;
+      }
+      .chatbot-footer button {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+      }
+      @media (max-width: 768px) {
+        .main-heading { font-size: 2rem; }
+        .symptom-form-container { padding: 30px; margin: 20px; }
+        .result-container { grid-template-columns: 1fr; }
+        .chatbot-container { width: 90%; right: 5%; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='ht.jpg') }}" alt="Health Center Logo" aria-label="Health Center Logo">
+        </div>
+        <a class="navbar-brand" href="#">Healthytic</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+          </ul>
+          <a href="/contact" class="btn btn-cta">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="main-heading">Your Health, Our Priority</h1>
+    <div class="symptom-form-container">
+      <form action="/" method="post" id="symptom-form" aria-label="Symptom Input Form">
+        <div class="form-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <input type="text" class="form-control symptom-input" id="symptoms" name="symptoms" placeholder="e.g., chest_pain, breathlessness" aria-describedby="symptomsHelp" value="{{ user_symptoms | join(', ') if user_symptoms else '' }}">
+          <small id="symptomsHelp" class="form-text text-muted">Enter symptoms separated by commas using exact names (e.g., chest_pain, breathlessness, high_fever). Or use the chatbot below.</small>
+        </div>
+        <!-- <button type="button" id="startSpeechRecognition" class="btn btn-speech" aria-label="Start Speech Recognition">Start Speech Recognition</button> -->
+         <button type="button" id="startChatbot" class="btn btn-chatbot" aria-label="Chat with Symptom Assistant">Chat with Symptom Assistant</button>
+        <div id="transcription" aria-live="polite"></div>
+        <button type="submit" class="btn btn-submit" aria-label="Get Recommendations">Predict</button>
+      </form>
+      {% if message %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if predicted_disease %}
+    <h1 class="results-heading">Your Health Insights</h1>
+    <div class="container">
+      <div class="result-container">
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal">Precautions</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#labTestsModal">Lab Tests</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#labTestHistoryModal">Test History</button>
+        <!-- <button class="toggle-button" id="generate-report-btn">Download Health Report</button> -->
+      </div>
+    </div>
+
+    <div id="hospital-data"
+         data-show-hospitals="{{ show_hospitals | tojson | safe }}"
+         data-static-hospitals="{{ static_hospitals | tojson | safe }}"
+         data-predicted-disease="{{ predicted_disease | default('Not available') }}"
+         data-user-symptoms="{{ user_symptoms | tojson | safe }}"
+         data-medications="{{ medications | tojson | safe }}"
+         data-my-precautions="{{ my_precautions | tojson | safe }}"
+         data-workout="{{ workout | tojson | safe }}"
+         data-my-diet="{{ my_diet | tojson | safe }}"
+         data-recommended-tests="{{ recommended_tests | tojson | safe }}"
+         style="display: none;"></div>
+    {% endif %}
+
+    {% if show_hospitals and predicted_disease %}
+    <div class="hospital-section">
+      <h2 class="hospital-heading">Nearby Facilities for {{ predicted_disease }}</h2>
+      <div id="hospital-list">
+        <p>Loading nearby facilities...</p>
+      </div>
+      <div id="manual-location" style="display: none; margin-top: 20px;">
+        <p>Enter your city or zip code to find facilities:</p>
+        <input type="text" id="location-input" class="form-control" placeholder="e.g., New York, NY or 10001" style="max-width: 300px; display: inline-block;">
+        <button id="submit-location" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="chatbot-icon" id="chatbot-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 0 0 0-2 1 1 0 0 0 0 2z"/>
+        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 1 .398-2.292z"/>
+      </svg>
+    </div>
+    <div class="chatbot-container" id="chatbot-container">
+      <div class="chatbot-header">
+        <h5>Healthytic Assistant</h5>
+        <button type="button" class="btn-close btn-close-white" id="chatbot-close" aria-label="Close"></button>
+      </div>
+      <div class="chatbot-body" id="chatbot-body">
+        <div class="chat-message bot">Hello! I'm here to help you describe your symptoms. What is your main symptom right now?</div>
+      </div>
+      <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="Type your response..." aria-label="Type your response">
+        <button id="chatbot-send">Send</button>
+      </div>
+    </div>
+
+    <div class="modal" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="diseaseModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ predicted_disease or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ dis_des or 'Not available' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="precautionModal" tabindex="-1" role="dialog" aria-labelledby="precautionModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="precautionModalLabel">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_precautions %}
+                {% for i in my_precautions %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No precautions available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="medicationsModal" tabindex="-1" role="dialog" aria-labelledby="medicationsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if medications %}
+                {% for i in medications %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No medications available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="workoutsModal" tabindex="-1" role="dialog" aria-labelledby="workoutsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if workout %}
+                {% for i in workout %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No workouts available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="dietsModal" tabindex="-1" role="dialog" aria-labelledby="dietsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if my_diet %}
+                {% for i in my_diet %}
+                  <li>{{ i }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No diets available</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="labTestsModal" tabindex="-1" role="dialog" aria-labelledby="labTestsModalLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labTestsModalLabel">Recommended Lab Tests</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% if recommended_tests %}
+                {% for test in recommended_tests %}
+                  <li>{{ test }}</li>
+                {% endfor %}
+              {% else %}
+                <li>No lab tests recommended</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="labTestHistoryModal" tabindex="-1" role="dialog" aria-labelledby="labTestHistoryModalLabel" aria-modal="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labTestHistoryModalLabel">Lab Test History</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="lab-test-form" aria-label="Submit Lab Test Result">
+              <div class="mb-3">
+                <label for="disease" class="form-label">Disease</label>
+                <input type="text" class="form-control" id="disease" name="disease" value="{{ predicted_disease or '' }}" placeholder="Enter disease" required>
+              </div>
+              <div class="mb-3">
+                <label for="test_name" class="form-label">Test Name</label>
+                <input type="text" class="form-control" id="test_name" name="test_name" placeholder="Enter test name" required>
+              </div>
+              <div class="mb-3">
+                <label for="test_result" class="form-label">Test Result</label>
+                <input type="text" class="form-control" id="test_result" name="test_result" placeholder="Enter test result" required>
+              </div>
+              <div class="mb-3">
+                <label for="test_date" class="form-label">Test Date</label>
+                <input type="date" class="form-control" id="test_date" name="test_date" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit Test Result</button>
+            </form>
+            <hr>
+            <h6 class="mt-4">Previous Test Results</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Disease</th>
+                    <th>Test Name</th>
+                    <th>Test Result</th>
+                    <th>Test Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if test_history %}
+                    {% for test in test_history %}
+                      <tr>
+                        <td>{{ test.disease }}</td>
+                        <td>{{ test.test_name }}</td>
+                        <td>{{ test.test_result }}</td>
+                        <td>{{ test.test_date }}</td>
+                      </tr>
+                    {% endfor %}
+                  {% else %}
+                    <tr>
+                      <td colspan="4">No test history available</td>
+                    </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+   <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Healthytic</h5>
+            <p>Your trusted partner in health insights and recommendations.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about" class="text-white">About</a></li>
+              <li><a href="/contact" class="text-white">Contact</a></li>
+              <li><a href="/developer" class="text-white">Developer</a></li>
+              <li><a href="/blog" class="text-white">Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>Email: <a href="mailto:support@healthcenter.com" class="text-white">support@healthcenter.com</a></p>
+            <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+        <hr>
+        <p class="text-center mb-0">© 2025 Healthytic. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const rawJsonString = '{{ symptoms_dict | tojson | safe }}';
+      console.log('Raw JSON string:', rawJsonString);
+
+      try {
+        window.symptoms_dict = JSON.parse(rawJsonString);
+        console.log('symptoms_dict loaded successfully:', window.symptoms_dict);
+      } catch (e) {
+        console.error('Error parsing symptoms_dict:', e);
+        window.symptoms_dict = {};
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hospitalDataElement = document.getElementById('hospital-data');
+        if (hospitalDataElement) {
+          console.log('Initial hospital-data attributes:', {
+            showHospitals: hospitalDataElement.dataset.showHospitals,
+            staticHospitals: hospitalDataElement.dataset.staticHospitals,
+            predictedDisease: hospitalDataElement.dataset.predictedDisease,
+            userSymptoms: hospitalDataElement.dataset.userSymptoms,
+            medications: hospitalDataElement.dataset.medications,
+            myPrecautions: hospitalDataElement.dataset.myPrecautions,
+            workout: hospitalDataElement.dataset.workout,
+            myDiet: hospitalDataElement.dataset.myDiet,
+            recommendedTests: hospitalDataElement.dataset.recommendedTests
+          });
+        } else {
+          console.warn('hospital-data element not found on initial load');
+        }
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html> 
+
+
+

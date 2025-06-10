@@ -1,0 +1,127 @@
+{
+  "symptoms": [
+    "fever", "high_fever", "chills", "fatigue", "headache", "severe_headache",
+    "dizziness", "nausea", "vomiting", "abdominal_pain", "diarrhea", "constipation",
+    "chest_pain", "breathlessness", "cough", "dry_cough", "wet_cough", "sore_throat",
+    "runny_nose", "sneezing", "joint_pain", "muscle_pain", "skin_rash", "itching",
+    "yellowing_skin", "dark_urine", "pale_stools", "swollen_lymph_nodes", "weight_loss",
+    "weight_gain", "increased_thirst", "frequent_urination", "burning_urination",
+    "palpitations", "fast_heart_rate", "slow_heart_rate", "swelling_legs", "numbness",
+    "tingling", "confusion", "memory_loss", "anxiety", "depression", "sleep_disturbance",
+    "blurred_vision", "hearing_loss", "difficulty_swallowing", "hoarseness", "unknown_symptom"
+  ],
+  "diseases": [
+    {
+      "name": "Flu",
+      "recommendations": {
+        "medications": ["Paracetamol", "Antiviral (e.g., Oseltamivir)"],
+        "diets": ["Hydrating fluids", "Soup", "Fruits"],
+        "workout": ["Rest", "Light stretching"],
+        "precautions": ["Avoid contact with others", "Wear a mask"],
+        "lab_tests": ["CBC", "Influenza test"],
+        "hospitals": ["General Hospital", "City Clinic"]
+      }
+    },
+    {
+      "name": "Dengue",
+      "recommendations": {
+        "medications": ["Paracetamol"],
+        "diets": ["Hydrating fluids", "Papaya leaf juice"],
+        "workout": ["Complete rest"],
+        "precautions": ["Mosquito repellent", "Stay hydrated"],
+        "lab_tests": ["NS1 Antigen", "CBC"],
+        "hospitals": ["Tropical Disease Center"]
+      }
+    },
+    {
+      "name": "Heart Attack",
+      "recommendations": {
+        "medications": ["Aspirin", "Nitroglycerin"],
+        "diets": ["Low-fat diet", "Vegetables"],
+        "workout": ["Avoid exertion", "Cardiac rehab"],
+        "precautions": ["Call emergency", "Monitor BP"],
+        "lab_tests": ["ECG", "Troponin"],
+        "hospitals": ["Cardiology Hospital"]
+      }
+    },
+    {
+      "name": "Migraine",
+      "recommendations": {
+        "medications": ["Sumatriptan", "Ibuprofen"],
+        "diets": ["Avoid caffeine", "Stay hydrated"],
+        "workout": ["Rest in a dark room"],
+        "precautions": ["Avoid loud noises", "Reduce screen time"],
+        "lab_tests": ["None required"],
+        "hospitals": ["Neurology Clinic"]
+      }
+    },
+    {
+      "name": "Gastroenteritis",
+      "recommendations": {
+        "medications": ["Oral Rehydration Salts", "Antiemetics (e.g., Ondansetron)"],
+        "diets": ["BRAT diet (Bananas, Rice, Applesauce, Toast)", "Hydrating fluids"],
+        "workout": ["Rest"],
+        "precautions": ["Wash hands frequently", "Avoid contaminated food"],
+        "lab_tests": ["Stool test", "CBC"],
+        "hospitals": ["General Hospital"]
+      }
+    },
+    {
+      "name": "Asthma",
+      "recommendations": {
+        "medications": ["Inhaled corticosteroids", "Albuterol"],
+        "diets": ["Anti-inflammatory foods", "Avoid allergens"],
+        "workout": ["Avoid strenuous exercise during attacks"],
+        "precautions": ["Use an inhaler", "Avoid triggers like dust"],
+        "lab_tests": ["Spirometry", "Allergy testing"],
+        "hospitals": ["Pulmonology Clinic"]
+      }
+    },
+    {
+      "name": "Hypothyroidism",
+      "recommendations": {
+        "medications": ["Levothyroxine"],
+        "diets": ["Iodine-rich foods", "Avoid goitrogens (e.g., soy)"],
+        "workout": ["Light exercise"],
+        "precautions": ["Regular thyroid checkups"],
+        "lab_tests": ["TSH", "T4 levels"],
+        "hospitals": ["Endocrinology Clinic"]
+      }
+    },
+    {
+      "name": "Unknown Disease",
+      "recommendations": {
+        "message": "Symptoms not recognized. Please consult a doctor."
+      }
+    }
+  ],
+  "mappings": [
+    {"symptom": "fever", "disease": "Flu", "weight": 0.8},
+    {"symptom": "cough", "disease": "Flu", "weight": 0.7},
+    {"symptom": "fatigue", "disease": "Flu", "weight": 0.6},
+    {"symptom": "sore_throat", "disease": "Flu", "weight": 0.5},
+    {"symptom": "runny_nose", "disease": "Flu", "weight": 0.5},
+    {"symptom": "high_fever", "disease": "Dengue", "weight": 0.9},
+    {"symptom": "joint_pain", "disease": "Dengue", "weight": 0.8},
+    {"symptom": "skin_rash", "disease": "Dengue", "weight": 0.7},
+    {"symptom": "muscle_pain", "disease": "Dengue", "weight": 0.6},
+    {"symptom": "chest_pain", "disease": "Heart Attack", "weight": 0.9},
+    {"symptom": "breathlessness", "disease": "Heart Attack", "weight": 0.8},
+    {"symptom": "fast_heart_rate", "disease": "Heart Attack", "weight": 0.7},
+    {"symptom": "palpitations", "disease": "Heart Attack", "weight": 0.6},
+    {"symptom": "headache", "disease": "Migraine", "weight": 0.8},
+    {"symptom": "severe_headache", "disease": "Migraine", "weight": 0.9},
+    {"symptom": "nausea", "disease": "Migraine", "weight": 0.7},
+    {"symptom": "blurred_vision", "disease": "Migraine", "weight": 0.6},
+    {"symptom": "abdominal_pain", "disease": "Gastroenteritis", "weight": 0.8},
+    {"symptom": "diarrhea", "disease": "Gastroenteritis", "weight": 0.9},
+    {"symptom": "vomiting", "disease": "Gastroenteritis", "weight": 0.7},
+    {"symptom": "nausea", "disease": "Gastroenteritis", "weight": 0.6},
+    {"symptom": "breathlessness", "disease": "Asthma", "weight": 0.9},
+    {"symptom": "dry_cough", "disease": "Asthma", "weight": 0.7},
+    {"symptom": "chest_pain", "disease": "Asthma", "weight": 0.5},
+    {"symptom": "fatigue", "disease": "Hypothyroidism", "weight": 0.8},
+    {"symptom": "weight_gain", "disease": "Hypothyroidism", "weight": 0.7},
+    {"symptom": "constipation", "disease": "Hypothyroidism", "weight": 0.6}
+  ]
+}
